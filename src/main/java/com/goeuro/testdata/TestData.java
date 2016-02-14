@@ -16,7 +16,7 @@ public class TestData {
 	}
 
 	/**
-	 * All the test data related to the search page.
+	 * All the test data related to the search operation.
 	 */
 	public class SearchPage {
 		public static final String SEARCH_FROM = "Berlin, Germany";

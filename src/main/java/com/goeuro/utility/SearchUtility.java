@@ -7,8 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import com.goeuro.locators.Locators;
-import com.goeuro.pages.Homepage;
-import com.goeuro.pages.SearchResults;
+import com.goeuro.pages.HomepagePage;
+import com.goeuro.pages.SearchResultsPage;
+import com.goeuro.pieces.TestResultPiece;
+import com.goeuro.testdata.TestResultObject;
 
 /**
  * A utility class that contains all the modules related to the search page.
@@ -18,8 +20,8 @@ public class SearchUtility {
 	private final static Logger LOGGER = Logger
 			.getLogger(SearchUtility.class.getName());
 
-	public static void performSearch(WebDriver driver, String searchFrom,
-			String searchTo) {
+	public static TestResultObject[] performSearch(WebDriver driver,
+			String searchFrom, String searchTo) {
 		LOGGER.log(Level.INFO,
 				String.format(
 						"Performing search with values: \"%s\" and \"%s\"",
@@ -27,7 +29,8 @@ public class SearchUtility {
 
 		// initiate the Homepage object that you are going to use for the search
 		// operation.
-		Homepage homepage = PageFactory.initElements(driver, Homepage.class);
+		HomepagePage homepage = PageFactory.initElements(driver,
+				HomepagePage.class);
 
 		// do the search operation
 		// type in each field and select the field with the exact text from the
@@ -35,7 +38,7 @@ public class SearchUtility {
 		LOGGER.log(Level.INFO, String.format(
 				"Typing \"%s\" in the search from text field...", searchFrom));
 		homepage.getSearchFromTextField().sendKeys(searchFrom);
-		WaitUtility.waitForElementToBeVisibleBy(driver, WaitUtility.XPATH,
+		WaitUtility.waitForElementToBeVisibleBy(driver, SeleniumUtility.XPATH,
 				String.format(Locators.Homepage.AUTO_COMPLETE_MENU_ITEM,
 						searchFrom),
 				10).click();
@@ -43,7 +46,7 @@ public class SearchUtility {
 		LOGGER.log(Level.INFO, String.format(
 				"Typing \"%s\" in the search to text field...", searchTo));
 		homepage.getSearchToTextfield().sendKeys(searchTo);
-		WaitUtility.waitForElementToBeVisibleBy(driver, WaitUtility.XPATH,
+		WaitUtility.waitForElementToBeVisibleBy(driver, SeleniumUtility.XPATH,
 				String.format(Locators.Homepage.AUTO_COMPLETE_MENU_ITEM,
 						searchTo),
 				10).click();
@@ -51,11 +54,28 @@ public class SearchUtility {
 		LOGGER.log(Level.INFO, "Clicking on the search button...");
 		homepage.getSearchButton().click();
 
-		// initiate the SearchResults object that you are going to interact
-		// with.
 		LOGGER.log(Level.INFO,
 				"Waiting for the search operation to complete...");
-		SearchResults searchResultsPage = PageFactory.initElements(driver,
-				SearchResults.class);
+
+		// initiate the SearchResults object that you are going to interact
+		// with.
+		SearchResultsPage searchResultsPage = PageFactory.initElements(driver,
+				SearchResultsPage.class);
+
+		TestResultPiece[] testResultUIPieces = searchResultsPage
+				.getSearchResults();
+		int searchResultsCount = testResultUIPieces.length;
+
+		LOGGER.log(Level.INFO, String.format(
+				"Search operation returned %s results.", searchResultsCount));
+
+		// get the search results
+		TestResultObject[] results = new TestResultObject[searchResultsCount];
+		for (int i = 0; i < results.length; i++) {
+			results[i] = testResultUIPieces[i].getTestResultObject();
+			LOGGER.log(Level.INFO, results[i].toString());
+		}
+
+		return results;
 	}
 }

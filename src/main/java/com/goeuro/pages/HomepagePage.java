@@ -1,5 +1,6 @@
 package com.goeuro.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -9,7 +10,11 @@ import com.goeuro.locators.Locators;
 /**
  * A page object that contains all the UI objects in the page.
  */
-public class Homepage {
+public class HomepagePage extends PageObject {
+
+	public HomepagePage(WebDriver driver) {
+		super(driver);
+	}
 
 	@FindBy(how = How.ID, using = Locators.Homepage.SEARCH_FROM_TEXT_FIELD)
 	private WebElement searchFromTextField;

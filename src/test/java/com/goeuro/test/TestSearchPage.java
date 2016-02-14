@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
 import com.goeuro.testdata.TestData;
+import com.goeuro.testdata.TestResultObject;
 import com.goeuro.utility.GeneralUtility;
 import com.goeuro.utility.SearchUtility;
 
@@ -25,7 +26,8 @@ public class TestSearchPage extends SeleniumBase {
 
 			// perform the search operation and wait for the results page to
 			// appear
-			SearchUtility.performSearch(driver, TestData.SearchPage.SEARCH_FROM,
+			TestResultObject[] results = SearchUtility.performSearch(driver,
+					TestData.SearchPage.SEARCH_FROM,
 					TestData.SearchPage.SEARCH_TO);
 		} catch (Exception ex) {
 			LOGGER.log(Level.INFO, "An exception was thrown.", ex);
