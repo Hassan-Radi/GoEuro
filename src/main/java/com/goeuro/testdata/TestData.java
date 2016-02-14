@@ -10,13 +10,16 @@ public class TestData {
 	 */
 	public class General {
 		public static final String URL = "http://www.goeuro.com/";
+		public static final int PAGE_LOADING_TIMEOUT = 60;
+		public static final int FINDING_ELEMENT_TIMEOUT = 20;
+		public static final int SCRIPT_TIMEOUT = 10;
 	}
 
 	/**
 	 * All the test data related to the search page.
 	 */
 	public class SearchPage {
-		public static final String SEARCH_FROM = "Berlin";
-		public static final String SEARCH_TO = "Prague";
+		public static final String SEARCH_FROM = "Berlin, Germany";
+		public static final String SEARCH_TO = "Prague, Czech Republic";
 	}
 }

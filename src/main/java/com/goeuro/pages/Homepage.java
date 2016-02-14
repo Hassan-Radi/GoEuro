@@ -2,19 +2,22 @@ package com.goeuro.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import com.goeuro.locators.Locators;
 
 /**
  * A page object that contains all the UI objects in the page.
  */
 public class Homepage {
 
-	@FindBy(id = "from_filter")
+	@FindBy(how = How.ID, using = Locators.Homepage.SEARCH_FROM_TEXT_FIELD)
 	private WebElement searchFromTextField;
 
-	@FindBy(id = "to_filter")
+	@FindBy(how = How.ID, using = Locators.Homepage.SEARCH_TO_TEXT_FIELD)
 	private WebElement searchToTextfield;
 
-	@FindBy(id = "search-form__submit-btn")
+	@FindBy(how = How.ID, using = Locators.Homepage.SEARCH_BUTTON)
 	private WebElement searchButton;
 
 	/**

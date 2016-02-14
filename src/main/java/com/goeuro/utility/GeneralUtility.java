@@ -1,5 +1,8 @@
 package com.goeuro.utility;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -8,7 +11,12 @@ import org.openqa.selenium.WebDriver;
  */
 public class GeneralUtility {
 
+	private final static Logger LOGGER = Logger
+			.getLogger(GeneralUtility.class.getName());
+
 	public static void navigateToURL(WebDriver driver, String url) {
+		LOGGER.log(Level.INFO,
+				String.format("Navigating to the URL: \"%s\"", url));
 		driver.navigate().to(url);
 	}
 }

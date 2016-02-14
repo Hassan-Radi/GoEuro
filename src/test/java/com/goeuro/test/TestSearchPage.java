@@ -1,5 +1,8 @@
 package com.goeuro.test;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.testng.annotations.Test;
 
 import com.goeuro.testdata.TestData;
@@ -11,6 +14,9 @@ import com.goeuro.utility.SearchUtility;
  */
 public class TestSearchPage extends SeleniumBase {
 
+	private final static Logger LOGGER = Logger
+			.getLogger(TestSearchPage.class.getName());
+
 	@Test
 	public void testSortByPrice() {
 		try {
@@ -19,10 +25,10 @@ public class TestSearchPage extends SeleniumBase {
 
 			// perform the search operation and wait for the results page to
 			// appear
-			SearchUtility.performSearch(TestData.SearchPage.SEARCH_FROM,
+			SearchUtility.performSearch(driver, TestData.SearchPage.SEARCH_FROM,
 					TestData.SearchPage.SEARCH_TO);
 		} catch (Exception ex) {
-			System.out.print("An exception was thrown." + ex.getStackTrace());
+			LOGGER.log(Level.INFO, "An exception was thrown.", ex);
 		}
 	}
 }
