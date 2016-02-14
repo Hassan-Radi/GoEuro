@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression Suite" verbose="1" parallel="classes"
+       thread-count="1">
+    <test name="Search Page" preserve-order="true">
+        <classes>
+            <class name="com.goeuro.test.TestSearchPage" />
+        </classes>
+    </test>
+</suite>
