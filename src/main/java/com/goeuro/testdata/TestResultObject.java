@@ -93,5 +93,4 @@ public class TestResultObject {
 				+ ", tripStops=" + tripStops + ", totalLegTime=" + totalLegTime
 				+ "]\n";
 	}
-
 }
